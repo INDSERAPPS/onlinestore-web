@@ -30,6 +30,6 @@ namespace onlinestore_web.Models
 
         public string AccountType { get; set; }
 
-        public string IsEnabled { get; set; }
+        public Boolean IsEnabled { get; set; }
     }
 }
