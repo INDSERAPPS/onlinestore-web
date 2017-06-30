@@ -22,3 +22,14 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.os-header1 {
+    color: #1367c3;
+    width:auto;
+    /*float:left;*/
+}
+.os-header2 {
+    color: #07a018;
+    width: auto;
+    /*float: left;*/
+}

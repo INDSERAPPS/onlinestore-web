@@ -91,6 +91,5 @@ C:\Users\srajan\Documents\GitHub\onlinestore-web\onlinestore-web\onlinestore-web
 C:\Users\srajan\Documents\GitHub\onlinestore-web\onlinestore-web\onlinestore-web\bin\Microsoft.AI.ServerTelemetryChannel.xml
 C:\Users\srajan\Documents\GitHub\onlinestore-web\onlinestore-web\onlinestore-web\bin\Microsoft.AI.WindowsServer.xml
 C:\Users\srajan\Documents\GitHub\onlinestore-web\onlinestore-web\onlinestore-web\bin\Microsoft.AI.Web.xml
-C:\Users\srajan\Documents\GitHub\onlinestore-web\onlinestore-web\onlinestore-web\obj\Debug\onlinestore-web.csprojResolveAssemblyReference.cache
 C:\Users\srajan\Documents\GitHub\onlinestore-web\onlinestore-web\onlinestore-web\obj\Debug\onlinestore-web.dll
 C:\Users\srajan\Documents\GitHub\onlinestore-web\onlinestore-web\onlinestore-web\obj\Debug\onlinestore-web.pdb

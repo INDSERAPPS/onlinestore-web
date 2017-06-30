@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using onlinestore_web.Models;
+using System.Net;
 
 namespace onlinestore_web.Controllers
 {
@@ -147,29 +148,36 @@ namespace onlinestore_web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(Customer model)
         {
+            string sRequest="";
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
-                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                //var result = await UserManager.CreateAsync(user, model.Password);
+                //if (result.Succeeded)
+                //{
+                    sRequest = @"{""name"": """ + model.Name + @""",""email"": """ + model.Email + @""",""password"": """ + model.Password + @""",""accountType"": ""S"",""isEnabled"": ""true""}";
+                //}
+                //await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                string method = "POST";
+                    WebClient client = new WebClient();
+
+                    client.Headers.Add("Content-Type", "application/json");
+                    client.Headers.Add("Accept-Charset", "utf-8");
+                    client.Headers.Add("Token", "sdfsdf");
+                    client.Headers.Add("Server", "34534534543");
+
+                    string reply = client.UploadString("http://35.182.84.185:8080/customerservice/v1.1/customers", method, sRequest);
 
                     return RedirectToAction("Index", "Home");
                 }
-                AddErrors(result);
-            }
+            //AddErrors(result);
+            return RedirectToAction("Index", "Home");
+        //}
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            //return View(model);
         }
 
         //
