@@ -25,7 +25,7 @@ namespace onlinestore_web.Controllers
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -37,9 +37,9 @@ namespace onlinestore_web.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -123,7 +123,7 @@ namespace onlinestore_web.Controllers
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
             // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -144,7 +144,7 @@ namespace onlinestore_web.Controllers
         {
             return View();
         }
-
+//--------------------------------------------------------------------------------------------------------------------------
         //
         // POST: /Account/Register
         [HttpPost]
@@ -152,32 +152,39 @@ namespace onlinestore_web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(Customer model)
         {
-            string sRequest="";
             if (ModelState.IsValid)
             {
-                model.IsEnabled = false;
-                model.AccountType = CustomerAccountType.B.ToString();
-                sRequest = CustomerToJson(model); 
+                string sRequest = "";
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    model.IsEnabled = false;
+                    model.AccountType = CustomerAccountType.B.ToString();
+                    sRequest = CustomerToJson(model);
 
-                return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Home");
+                }
+                AddErrors(result);
             }
-            return RedirectToAction("Index", "Home");
+            return View(model);
         }
-
+//--------------------------------------------------------------------------------------------------------------------------
         //
         // CREATE: Json from customer object
         public string CustomerToJson(Customer customer)
-        {
-            JObject JsonCustomer = new JObject();
-            JsonCustomer.Add("Name", customer.Name);
-            JsonCustomer.Add("Email", customer.Email);
-            JsonCustomer.Add("Password", customer.Password);
-            JsonCustomer.Add("AccountType", customer.AccountType);
-            JsonCustomer.Add("IsEnabled", customer.IsEnabled);
+            {
+                JObject JsonCustomer = new JObject();
+                JsonCustomer.Add("Name", customer.Name);
+                JsonCustomer.Add("Email", customer.Email);
+                JsonCustomer.Add("Password", customer.Password);
+                JsonCustomer.Add("AccountType", customer.AccountType);
+                JsonCustomer.Add("IsEnabled", customer.IsEnabled);
 
-            return JsonCustomer.ToString();
-        }
-
+                return JsonCustomer.ToString();
+            }
+//--------------------------------------------------------------------------------------------------------------------------
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
