@@ -12,6 +12,7 @@ using onlinestore_web.Models;
 using System.Net;
 using Newtonsoft.Json.Linq;
 using static onlinestore_web.Common.Types;
+using onlinestore_web.Common;
 
 namespace onlinestore_web.Controllers
 {
@@ -163,6 +164,10 @@ namespace onlinestore_web.Controllers
                     model.IsEnabled = false;
                     model.AccountType = CustomerAccountType.B.ToString();
                     sRequest = CustomerToJson(model);
+
+                    //GET Eureka Server
+                    APICallManager WebAPI = new APICallManager();
+                    string EurekaInstances = WebAPI.CallAPI(@"http://tcs-poc-ms-eurekaserver.com/eureka/v2/apps", APIMethod.GET, "");
 
                     return RedirectToAction("Index", "Home");
                 }

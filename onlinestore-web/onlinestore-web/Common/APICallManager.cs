@@ -12,23 +12,26 @@ namespace onlinestore_web.Common
 {
     public class APICallManager
     {
-        WebClient client;
         public APICallManager()
         {
-            string method = "POST";
-            client = new WebClient();
-            IPHostEntry HostInfo = Dns.GetHostEntry(Dns.GetHostName());
-            Guid GUID = Guid.NewGuid();
-            client.Headers.Add("Content-Type", "application/json");
-            client.Headers.Add("Accept-Charset", "utf-8");
-            client.Headers.Add("Token", GUID.ToString());
-            client.Headers.Add("Server", HostInfo.ToString());
+
         }
 
-        public string CallAPI(string URL, APIMethod Method, string InputJson)
+        public string CallAPI(string URL, APIMethod Method, string InputJson, Boolean AddHeader = false)
         {
             try
             {
+                WebClient client = new WebClient();
+                if (AddHeader)
+                {
+                    
+                    IPHostEntry HostInfo = Dns.GetHostEntry(Dns.GetHostName());
+                    Guid GUID = Guid.NewGuid();
+                    client.Headers.Add("Content-Type", "application/json");
+                    client.Headers.Add("Accept-Charset", "utf-8");
+                    client.Headers.Add("Token", GUID.ToString());
+                    client.Headers.Add("Server", HostInfo.ToString());
+                }
                 string webResponse = client.UploadString(URL, Method.ToString(), InputJson);
                 return webResponse;
             }
