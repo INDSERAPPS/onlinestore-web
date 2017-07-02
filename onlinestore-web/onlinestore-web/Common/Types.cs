@@ -7,13 +7,7 @@ namespace onlinestore_web.Common
 {
     public class Types
     {
-        //public Type APIHeader()
-        //{
-        //    string ContentType;
-        //    string AcceptCHarset;
-        //    string Token;
-        //    string Server;
-        //}
+        public string EurekaURL = @"http://tcs-poc-ms-eurekaserver.com/eureka/apps/";
         //--------------------------------------------------------------------------------------------------------------
         public enum APIMethod
         {
@@ -29,13 +23,23 @@ namespace onlinestore_web.Common
             P = 2
         };
         //--------------------------------------------------------------------------------------------------------------
-        public enum EurekaURLs
+        public enum MicroserviceApps
         {
-            B = 0,
-            S = 1,
-            P = 2
+            CUSTOMERSERVICE = 0,
+            PRODUCTSERVICE = 1,
+            IDGENERATORSERVICE = 2,
+            ORDERSERVICE = 3,
+            PAYMENTSERVICE = 4,
+            ONLINEWEBAPP = 5,
+            MESSAGELOGGER = 6
         };
         //--------------------------------------------------------------------------------------------------------------
-
+        //public enum MicroserviceApps
+        //{
+        //    CUSTOMERSERVICE = 0,
+        //    S = 1,
+        //    P = 2
+        //};
+        //--------------------------------------------------------------------------------------------------------------
     }
 }
