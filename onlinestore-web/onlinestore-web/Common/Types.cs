@@ -25,21 +25,17 @@ namespace onlinestore_web.Common
         //--------------------------------------------------------------------------------------------------------------
         public enum MicroserviceApps
         {
-            CUSTOMERSERVICE = 0,
-            PRODUCTSERVICE = 1,
-            IDGENERATORSERVICE = 2,
-            ORDERSERVICE = 3,
-            PAYMENTSERVICE = 4,
-            ONLINEWEBAPP = 5,
-            MESSAGELOGGER = 6
+            EUREKASERVER = 0,
+            CUSTOMERSERVICE = 1,
+            PRODUCTSERVICE = 2,
+            IDGENERATORSERVICE = 3,
+            ORDERSERVICE = 4,
+            PAYMENTSERVICE = 5,
+            ONLINEWEBAPP = 6,
+            MESSAGELOGGER = 7
         };
         //--------------------------------------------------------------------------------------------------------------
-        //public enum MicroserviceApps
-        //{
-        //    CUSTOMERSERVICE = 0,
-        //    S = 1,
-        //    P = 2
-        //};
+
         //--------------------------------------------------------------------------------------------------------------
     }
 }

@@ -27,12 +27,16 @@ namespace onlinestore_web.Common
                     
                     IPHostEntry HostInfo = Dns.GetHostEntry(Dns.GetHostName());
                     Guid GUID = Guid.NewGuid();
-                    client.Headers.Add("Content-Type", "application/json");
+                    client.Headers.Add("Content-Type", "application/xml");
                     client.Headers.Add("Accept-Charset", "utf-8");
                     client.Headers.Add("Token", GUID.ToString());
                     client.Headers.Add("Server", HostInfo.ToString());
                 }
-                string webResponse = client.UploadString(URL, Method.ToString(), InputJson);
+                string webResponse="";
+                if (Method == APIMethod.GET)
+                {
+                    webResponse = client.DownloadString(URL);
+                }
                 return webResponse;
             }
             catch(Exception ex)

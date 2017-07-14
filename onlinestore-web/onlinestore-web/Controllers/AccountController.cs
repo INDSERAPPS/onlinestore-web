@@ -167,7 +167,8 @@ namespace onlinestore_web.Controllers
 
                     //GET Eureka Server
                     APICallManager WebAPI = new APICallManager();
-                    string EurekaInstances = WebAPI.CallAPI(Types. + MicroserviceApps.CUSTOMERSERVICE, APIMethod.GET, "");
+                    Types types = new Types();
+                    string EurekaInstances = WebAPI.CallAPI(types.EurekaURL + MicroserviceApps.CUSTOMERSERVICE.ToString(), APIMethod.GET, "");
 
                     return RedirectToAction("Index", "Home");
                 }
